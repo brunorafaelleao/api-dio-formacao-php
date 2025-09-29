@@ -44,6 +44,32 @@ class BandController extends Controller
     }
 
 
+    //funcao para retornar a banda pelo Gênero
+    public function getByGenero($genero)
+    {
+        try {
+            $banda = [];
+
+            foreach ($this->getBand() as $band) {
+                if (strtolower($band['gênero']) == strtolower($genero)) {
+                    $banda[] = $band;
+                }
+            }
+
+            if (!$banda) {
+                throw new Exception("Não foi encontrada nenhuma banda do gênero: " . $genero, 404);
+            }
+
+            return response()->json($banda);
+
+        } catch (Exception $e) {
+            return response()->json([
+                'erro' => $e->getMessage()
+            ], $e->getCode() ?: 400);
+        }
+    }
+
+
     //funcao para listar as bandas
     protected function getBand()
     {
@@ -56,7 +82,7 @@ class BandController extends Controller
             [
                 'id' => 2,
                 'nome' => 'Falamansa',
-                'gênero' => 'Forró'
+                'gênero' => 'Forro'
             ],
             [
                 'id' => 3,

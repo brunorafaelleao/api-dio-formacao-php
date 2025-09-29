@@ -26,3 +26,8 @@ Route::get('bands', [BandController::class, 'getALL']);
 
 //rota para listar uma banda pelo id
 Route::get('bands/{id}  ', [BandController::class, 'getById']);
+
+//rota para listar uma banda pelo gênero
+Route::get('bands/genero/{genero}', [BandController::class, 'getByGenero']);
+
+Route::post('banda-post');
